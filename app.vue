@@ -1,7 +1,7 @@
 <script setup>
-const { title, description, image } = useAppConfig()
+const { title, description, image, titleBar } = useAppConfig()
 useSeoMeta({
-  title: `${title} - ${description}`,
+  title: titleBar,
   description,
   ogType: 'website',
   ogTitle: title,
