@@ -1,8 +1,4 @@
 <script setup>
-const email = ref(null)
-onMounted(() => {
-  email.value.href = email.value.href.replace('$', '@')
-})
 </script>
 
 <template>
