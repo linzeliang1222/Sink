@@ -1,5 +1,5 @@
-import type { z } from 'zod'
 import type { SelectStatement } from 'sql-bricks'
+import type { z } from 'zod'
 import type { FilterSchema, QuerySchema } from '@/schemas/query'
 
 export type Query = z.infer<typeof QuerySchema>

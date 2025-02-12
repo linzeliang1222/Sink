@@ -1,11 +1,11 @@
 <script setup>
-import { z } from 'zod'
-import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { Shuffle, Sparkles } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
 import { toast } from 'vue-sonner'
-import { DependencyType } from '@/components/ui/auto-form/interface'
+import { z } from 'zod'
 import { LinkSchema, nanoid } from '@/schemas/link'
+import { DependencyType } from '@/components/ui/auto-form/interface'
 
 const props = defineProps({
   link: {
@@ -115,7 +115,12 @@ async function onSubmit(formData) {
   })
   dialogOpen.value = false
   emit('update:link', newLink, isEdit ? 'edit' : 'create')
-  isEdit ? toast('Link updated successfully') : toast('Link created successfully')
+  if (isEdit) {
+    toast('Link updated successfully')
+  }
+  else {
+    toast('Link created successfully')
+  }
 }
 
 const { previewMode } = useRuntimeConfig().public

@@ -1,6 +1,12 @@
 export default defineAppConfig({
   title: 'Sink',
   titleBar: 'Dark の Short Link',
+  email: '',
+  github: '',
+  twitter: '',
+  telegram: '',
+  mastodon: '',
+  blog: '',
   description: 'A Simple / Speedy / Secure Link Shortener with Analytics, 100% run on Cloudflare.',
   image: 'https://sink.cool/banner.png',
   previewTTL: 24 * 3600, // 24h

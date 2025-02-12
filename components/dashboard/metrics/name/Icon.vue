@@ -1,30 +1,4 @@
 <script setup>
-// https://vue3-simple-icons.wyatt-herkamp.dev/
-import {
-  AndroidIcon,
-  AppleIcon,
-  DebianIcon,
-  FacebookIcon,
-  FirefoxBrowserIcon,
-  GoogleChromeIcon,
-  GoogleIcon,
-  HuaweiIcon,
-  IOsIcon,
-  InternetExplorerIcon,
-  LinuxIcon,
-  MacOsIcon,
-  MicrosoftEdgeIcon,
-  OperaIcon,
-  SafariIcon,
-  SamsungIcon,
-  UbuntuIcon,
-  VivoIcon,
-  WeChatIcon,
-  WindowsIcon,
-  XiaomiIcon,
-  YandexCloudIcon,
-} from 'vue3-simple-icons'
-
 import {
   Globe,
   Laptop,
@@ -33,6 +7,35 @@ import {
   Tablet,
   Terminal,
 } from 'lucide-vue-next'
+
+// https://vue3-simple-icons.wyatt-herkamp.dev/
+import {
+  AndroidIcon,
+  AppleIcon,
+  DebianIcon,
+  FacebookIcon,
+  FirefoxBrowserIcon,
+  GnuIcon,
+  GoogleChromeIcon,
+  GoogleIcon,
+  HuaweiIcon,
+  IOsIcon,
+  // InternetExplorerIcon,
+  LinuxIcon,
+  MacOsIcon,
+  // MicrosoftEdgeIcon,
+  OperaIcon,
+  SafariIcon,
+  SamsungIcon,
+  UbuntuIcon,
+  VivoIcon,
+  WeChatIcon,
+  WearOsIcon,
+  XIcon,
+  XiaomiIcon,
+  // WindowsIcon,
+  YandexCloudIcon,
+} from 'vue3-simple-icons'
 
 defineProps({
   name: {
@@ -47,6 +50,7 @@ defineProps({
 
 const iconMaps = {
   'android': AndroidIcon,
+  'android browser': AndroidIcon,
   'browser': Globe,
   'chrome': GoogleChromeIcon,
   'chrome headless': GoogleChromeIcon,
@@ -55,15 +59,15 @@ const iconMaps = {
   'curl': Terminal,
   'debian': DebianIcon,
   'desktop': MonitorCheck,
-  'edge': MicrosoftEdgeIcon,
   'facebook': FacebookIcon,
   'facebookexternalhit': FacebookIcon,
   'firefox': FirefoxBrowserIcon,
   'googlebot': GoogleIcon,
   'googlebot-image': GoogleIcon,
+  'gnu': GnuIcon,
   'harmonyos': HuaweiIcon,
   'huawei browser': HuaweiIcon,
-  'ie': InternetExplorerIcon,
+  // 'ie': InternetExplorerIcon,
   'ios': IOsIcon,
   'ipad': AppleIcon,
   'iphone': AppleIcon,
@@ -82,10 +86,11 @@ const iconMaps = {
   'safari': SafariIcon,
   'samsung internet': SamsungIcon,
   'tablet': Tablet,
+  'twitterbot': XIcon,
   'ubuntu': UbuntuIcon,
   'vivo browser': VivoIcon,
   'wechat': WeChatIcon,
-  'windows': WindowsIcon,
+  'wearable': WearOsIcon,
   'yandex': YandexCloudIcon,
 }
 </script>

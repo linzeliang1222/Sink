@@ -3,6 +3,7 @@ import { Ellipsis, X } from 'lucide-vue-next'
 import SwitchTheme from '../SwitchTheme.vue'
 
 const showMenu = ref(false)
+const { title } = useAppConfig()
 </script>
 
 <template>
@@ -14,7 +15,7 @@ const showMenu = ref(false)
         <div class="flex items-center justify-start w-1/4 h-full pr-4">
           <a
             href="/"
-            title="Sink"
+            :title="title"
             class="flex items-center py-4 space-x-2 text-xl font-black text-gray-900 dark:text-gray-100 md:py-0"
           >
             <span
@@ -22,11 +23,11 @@ const showMenu = ref(false)
             >
               <img
                 src="/sink.png"
-                alt="Sink"
+                :alt="title"
                 class="w-full h-full rounded-full"
               >
             </span>
-            <span class="mx-2">Sink</span>
+            <span class="mx-2">{{ title }}</span>
           </a>
         </div>
 
@@ -40,7 +41,7 @@ const showMenu = ref(false)
           >
             <a
               href="/"
-              title="Sink"
+              :title="title"
               class="inline-flex items-center w-auto h-16 px-4 text-xl font-black leading-none text-gray-900 dark:text-gray-100 md:hidden"
             >
               <span
@@ -48,11 +49,11 @@ const showMenu = ref(false)
               >
                 <img
                   src="/sink.png"
-                  alt="Sink"
+                  :alt="title"
                   class="w-full h-full rounded-full"
                 >
               </span>
-              <span class="mx-2">Sink</span>
+              <span class="mx-2">{{ title }}</span>
             </a>
             <div class="w-full mx-4" />
             <div
@@ -61,7 +62,7 @@ const showMenu = ref(false)
               <a
                 class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer dark:text-gray-300 md:px-3 md:mr-2 lg:mr-3 md:w-auto"
                 href="/dashboard"
-                title="Sink Dashboard"
+                :title="`${title} Dashboard`"
               >Dashboard</a>
               <span class="ml-1">
                 <SwitchTheme />
