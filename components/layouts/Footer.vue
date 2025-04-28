@@ -11,7 +11,7 @@ const { title } = useAppConfig()
         title="Sink"
       >{{ title }}</a>
       <span class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0">
-        &copy; {{ new Date().getFullYear() }} Dark の Short Link
+        &copy; {{ new Date().getFullYear() }} Zller の Short Link
       </span>
     </div>
   </section>
