@@ -1,6 +1,5 @@
 <script setup>
 import { Ellipsis, X } from 'lucide-vue-next'
-import SwitchTheme from '../SwitchTheme.vue'
 
 const showMenu = ref(false)
 const { title } = useAppConfig()
@@ -63,27 +62,28 @@ const { title } = useAppConfig()
                 class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer dark:text-gray-300 md:px-3 md:mr-2 lg:mr-3 md:w-auto"
                 href="/dashboard"
                 :title="`${title} Dashboard`"
-              >Dashboard</a>
-              <span class="ml-1">
-                <SwitchTheme />
-              </span>
+              >{{ $t('dashboard.title') }}</a>
+
+              <SwitchLanguage />
+
+              <SwitchTheme />
             </div>
           </div>
+        </div>
 
-          <div
-            class="absolute right-0 flex flex-col items-center justify-center w-10 h-10 rounded-full cursor-pointer md:hidden hover:bg-muted"
-            :class="{ 'right-2': showMenu }"
-            @click="showMenu = !showMenu"
-          >
-            <Ellipsis
-              v-show="!showMenu"
-              class="w-6 h-6"
-            />
-            <X
-              v-show="showMenu"
-              class="w-6 h-6"
-            />
-          </div>
+        <div
+          class="absolute right-0 flex flex-col items-center justify-center w-10 h-10 rounded-full cursor-pointer md:hidden hover:bg-muted"
+          :class="{ 'right-2': showMenu }"
+          @click="showMenu = !showMenu"
+        >
+          <Ellipsis
+            v-show="!showMenu"
+            class="w-6 h-6"
+          />
+          <X
+            v-show="showMenu"
+            class="w-6 h-6"
+          />
         </div>
       </div>
     </nav>
