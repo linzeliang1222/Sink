@@ -1,10 +1,11 @@
 import type { H3Event } from 'h3'
+import { QuerySchema } from '@@/schemas/query'
 import { z } from 'zod'
-import { QuerySchema } from '@/schemas/query'
 
 const { select } = SqlBricks
 
 const unitMap: { [x: string]: string } = {
+  minute: '%H:%M',
   hour: '%Y-%m-%d %H',
   day: '%Y-%m-%d',
 }
