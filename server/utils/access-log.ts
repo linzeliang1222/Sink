@@ -12,6 +12,7 @@ import {
   Vehicles,
 } from 'ua-parser-js/extensions'
 import { parseURL } from 'ufo'
+import { getIpGeoInfo } from './ip-geo'
 import { getFlag } from '@/utils/flag'
 
 function toBlobNumber(blob: string) {
@@ -92,8 +93,9 @@ export function doubles2logs(doubles: number[]) {
   }, {} as Partial<LogsMap>)
 }
 
-export function useAccessLog(event: H3Event) {
-  const ip = getHeader(event, 'REMOTE-HOST') || getHeader(event, 'cf-connecting-ip') || getHeader(event, 'x-real-ip') || getRequestIP(event, { xForwardedFor: true })
+export async function useAccessLog(event: H3Event) {
+  const REMOTE_HOST = getHeader(event, 'REMOTE-HOST')
+  const ip = REMOTE_HOST || getHeader(event, 'cf-connecting-ip') || getHeader(event, 'x-real-ip') || getRequestIP(event, { xForwardedFor: true })
 
   const { host: referer } = parseURL(getHeader(event, 'referer'))
 
@@ -123,18 +125,31 @@ export function useAccessLog(event: H3Event) {
     return Promise.resolve()
   }
 
+  let geoInfo: { country?: string, region?: string, city?: string, timezone?: string } = {}
+  if (REMOTE_HOST) {
+    geoInfo = await getIpGeoInfo(REMOTE_HOST) || {}
+    if (!(geoInfo?.country && geoInfo?.region && geoInfo?.city && geoInfo?.timezone)) {
+      geoInfo = {}
+      console.warn('å')
+    }
+  }
+
+  const country = geoInfo?.country || cf?.country
+  const region = geoInfo?.region || cf?.region
+  const city = geoInfo?.city || cf?.city
+  const timezone = geoInfo?.timezone || cf?.timezone
   const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
-  const countryName = regionNames.of(cf?.country || 'WD') // fallback to "Worldwide"
+  const countryName = regionNames.of(country || 'WD') // fallback to "Worldwide"
   const accessLogs = {
     url: link.url,
     slug: link.slug,
     ua: userAgent,
     ip,
     referer,
-    country: cf?.country,
-    region: `${getFlag(cf?.country)} ${[cf?.region, countryName].filter(Boolean).join(',')}`,
-    city: `${getFlag(cf?.country)} ${[cf?.city, countryName].filter(Boolean).join(',')}`,
-    timezone: cf?.timezone,
+    country,
+    region: `${getFlag(country)} ${[region, countryName].filter(Boolean).join(',')}`,
+    city: `${getFlag(country)} ${[city, countryName].filter(Boolean).join(',')}`,
+    timezone,
     language,
     os: uaInfo?.os?.name,
     browser: uaInfo?.browser?.name,
