@@ -125,12 +125,12 @@ export async function useAccessLog(event: H3Event) {
     return Promise.resolve()
   }
 
-  let geoInfo: { country?: string, region?: string, city?: string, timezone?: string } = {}
+  let geoInfo: { country?: string, region?: string, city?: string, timezone?: string, latitude?: string, longitude?: string } = {}
   if (REMOTE_HOST) {
     geoInfo = await getIpGeoInfo(REMOTE_HOST) || {}
-    if (!(geoInfo?.country && geoInfo?.region && geoInfo?.city && geoInfo?.timezone)) {
+    if (!(geoInfo?.country && geoInfo?.region && geoInfo?.city && geoInfo?.timezone && geoInfo?.latitude && geoInfo?.longitude)) {
       geoInfo = {}
-      console.warn('å')
+      console.warn('Incomplete geo info from API, falling back to Cloudflare data.')
     }
   }
 
@@ -159,8 +159,8 @@ export async function useAccessLog(event: H3Event) {
     COLO: cf?.colo,
 
     // For RealTime Globe
-    latitude: Number(cf?.latitude || getHeader(event, 'cf-iplatitude') || 0),
-    longitude: Number(cf?.longitude || getHeader(event, 'cf-iplongitude') || 0),
+    latitude: Number(geoInfo?.latitude || cf?.latitude || getHeader(event, 'cf-iplatitude') || 0),
+    longitude: Number(geoInfo?.longitude || cf?.longitude || getHeader(event, 'cf-iplongitude') || 0),
   }
 
   if (process.env.NODE_ENV === 'production') {
